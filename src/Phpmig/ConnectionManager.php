@@ -13,7 +13,7 @@ class ConnectionManager
      */
     public static function build(ConfigDTO $config)
     {
-        return $config->getDriver() . ":dbname=" . $config->getDbName() . ";host=" . $config->getHost();
+        return $config->getDriver() . ":dbname=" . $config->getDbName() . ";host=" . $config->getHost() . ";";
     }
 
     /**

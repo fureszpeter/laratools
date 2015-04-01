@@ -52,14 +52,14 @@ class Container extends Pimple
      * @param $keyName
      * @param ConfigDTO $config
      *
-     * @return Capsule
+     * @return \Illuminate\Database\Capsule\Manager
      */
     public function setEloquentCapsule($keyName, ConfigDTO $config)
     {
         $this[$keyName] = $this->share(function () use ($config) {
             /* Bootstrap Eloquent */
             $capsule = new Capsule;
-            $capsule->addConnection($this->convertDTOtoArray($config));
+            $capsule->addConnection($config->toArray());
             $capsule->setAsGlobal();
 
             /* Bootstrap end */
@@ -68,20 +68,4 @@ class Container extends Pimple
 
         return $this[$keyName];
     }
-
-    /**
-     * @param ConfigDTO $config
-     * @return array
-     */
-    protected function convertDTOtoArray(ConfigDTO $config)
-    {
-        return [
-            ConfigDTO::CONFIG_DB_DRIVER => $config->getDriver(),
-            ConfigDTO::CONFIG_DB_HOST   => $config->getHost(),
-            ConfigDTO::CONFIG_DB_NAME   => $config->getDbName(),
-            ConfigDTO::CONFIG_DB_USER   => $config->getUsername(),
-            ConfigDTO::CONFIG_DB_PASS   => $config->getPassword()
-        ];
-    }
-
 }
