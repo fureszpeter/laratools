@@ -1,1 +1,13 @@
-/vendor/
+#composer ignore
+/vendor
+/.env
+
+#phpStorm ignore
+.idea
+
+_ide_helper.php
+
+/config
+/migrations
+
+
